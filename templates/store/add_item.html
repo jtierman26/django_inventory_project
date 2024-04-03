@@ -1,0 +1,35 @@
+<!--  parts of this code were obtained and modified to the programs needs from 
+[1]“Build an Inventory Management System with Python and Django - Overview,” 
+www.youtube.com. https://www.youtube.com/watch?v=axGWgK2ep4Q&list=PLWwo7xJYACuQ2tVSIzAarcUvNlR3oTk-w&index=1 (accessed Mar. 30, 2024).  -->
+
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<div class="row" style="background-color:#C0C0C0;">
+    <div class="col-md-6">
+        <div class="card mx-auto" style="width: 40rem;">
+            <div class="card-body">
+                <h5 class="card-title mb-3">Add Item</h5>
+
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="exampleInputItem" class="form-label">Item Name</label>
+                        {% render_field form.item_name class="form-control" %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleInputAmount" class="form-label">Amount</label>
+                        {% render_field form.item_amount class="form-control" %}
+                    </div>
+
+                    <button type="submit" class="btn" style="background-color:#40B5AD">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

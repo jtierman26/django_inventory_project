@@ -1,0 +1,43 @@
+<!--  parts of this code were obtained and modified to the programs needs from 
+[1]“Build an Inventory Management System with Python and Django - Overview,” 
+www.youtube.com. https://www.youtube.com/watch?v=axGWgK2ep4Q&list=PLWwo7xJYACuQ2tVSIzAarcUvNlR3oTk-w&index=1 (accessed Mar. 30, 2024).  -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card mx-auto" style="width: 76rem;" style="background-color:#C0C0C0;">
+    <div class="card-body">
+        <h5 class="card-title mb-3">Item Return History </h5>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Item Name</th>
+                    <th scope="col">Amount Returned</th>
+                    <th scope="col">Returner</th>
+                    <th scope="col">Date Returned</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items%}
+                <tr>
+                    <td>{{item.item}}</td>
+                    <td>{{item.amount_returned}}</td>
+                    <td>{{item.returner}}</td>
+                    <td>{{item.date_returned}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Button to add another Item-->
+        <a href="{% url 'return-item' %}" class="btn" style="background-color:#40B5AD" role="button">Return Another Item</a>
+
+        <!-- Button to add another Item-->
+        <a href="{% url 'add-item' %}" class="btn" style="background-color:#40B5AD" role="button">Add Another Item</a>
+
+    </div>
+</div>
+
+{% endblock content %}

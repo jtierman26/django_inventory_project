@@ -1,0 +1,47 @@
+<!--  parts of this code were obtained and modified to the programs needs from 
+[1]“Build an Inventory Management System with Python and Django - Overview,” 
+www.youtube.com. https://www.youtube.com/watch?v=axGWgK2ep4Q&list=PLWwo7xJYACuQ2tVSIzAarcUvNlR3oTk-w&index=1 (accessed Mar. 30, 2024).  -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card mx-auto" style="width: 76rem;" style="background-color:#C0C0C0;">
+    <div class="card-body">
+        <h5 class="card-title mb-3">All Items In Stock</h5>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Item Name</th>
+                    <th scope="col">Amount in Stock</th>
+                    <th scope="col">Creator</th>
+                    <th scope="col">Date Created</th>
+                    <th scope="col">Original Amount</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items%}
+                <tr>
+                    <td>{{item.item_name}}</td>
+                    <td>{{item.item_amount}}</td>
+                    <td>{{item.creator}}</td>
+                    <td>{{item.date_created}}</td>
+                    <td>{{item.original_amount}}</td>
+                    <td><a href="{% url 'update-item' item.pk %}"><small>Update</small></a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Button to add another Item-->
+        <a href="{% url 'add-item' %}" class="btn" style="background-color:#40B5AD" role="button">Add Another Item</a>
+        
+        <!-- Button to add another Item-->
+        <a href="{% url 'issue-item' %}" class="btn" style="background-color:#40B5AD" role="button">Add New Issue</a>
+
+    </div>
+</div>
+
+{% endblock content %}

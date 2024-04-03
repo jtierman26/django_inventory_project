@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card mx-auto" style="width: 76rem;" style="background-color:#C0C0C0;">
+    <div class="card-body">
+        <h5 class="card-title mb-3">Item Issue History </h5>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Item Name</th>
+                    <th scope="col">Issued Amount</th>
+                    <th scope="col">Issued By</th>
+                    <th scope="col">Issued To</th>
+                    <th scope="col">Department</th>
+                    <th scope="col">Date Issued</th>
+                    <th scope="col">Return Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items%}
+                <tr>
+                    <td>{{item.item}}</td>
+                    <td>{{item.amount}}</td>
+                    <td>{{item.issued_by}}</td>
+                    <td>{{item.issued_to}}</td>
+                    <td>{{item.department}}</td>
+                    <td>{{item.date_issued}}</td>
+                    <td>{{item.date_return}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        
+        <!-- Button to add another Item-->
+        <a href="{% url 'add-item' %}" class="btn" style="background-color:#40B5AD" role="button">Add Another Item</a>
+        
+        <!-- Button to add new Issue-->
+        <a href="{% url 'issue-item' %}" class="btn" style="background-color:#40B5AD" role="button">Add New Issue</a>
+
+    </div>
+</div>
+
+{% endblock content %}
