@@ -70,10 +70,10 @@ def update_item(request, pk):
             return redirect('all-items')
         else:
             messages.warning(request, 'Uh Oh... Something went wrong')
-            
+            return redirect('all-items')
     else:
         form = UpdateItem_form(instance=item)
-        context = {'form':form}
+        context = {'form':form, 'item':item}
         return render(request, 'store/update_item.html', context)
     
 
@@ -85,11 +85,14 @@ def all_Items(request):
 
 
 #delete the Item
-def delete_Item(request, pk):
-    item = Item.objects.get(pk=pk)
-    item.delete()
-    messages.info(request, 'Item has been successfully deleted')
-    return redirect(request, 'store/delete_item.html')
+def delete_item(request, pk):
+    item = Item.objects.get(Item, pk=pk)
+    if request.method == 'POST':
+        item.delete()
+        messages.info(request, 'Item has been successfully deleted')
+        return redirect(request, 'store/all_items.html')
+    context = {'items':item}
+    return render(request, 'store/delete_item.html', context)
 
 
 #item issue

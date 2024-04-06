@@ -68,3 +68,4 @@ class RestockItem(models.Model):
     amount = models.PositiveIntegerField()
     timestamp = models.DateField(auto_now_add=True)
     original_value = models.PositiveBigIntegerField(null=True, blank=True)
+

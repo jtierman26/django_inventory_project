@@ -19,6 +19,7 @@ www.youtube.com. https://www.youtube.com/watch?v=axGWgK2ep4Q&list=PLWwo7xJYACuQ2
                     <th scope="col">Date Created</th>
                     <th scope="col">Original Amount</th>
                     <th scope="col">Action</th>
+                    <th scope='col'>Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -30,6 +31,7 @@ www.youtube.com. https://www.youtube.com/watch?v=axGWgK2ep4Q&list=PLWwo7xJYACuQ2
                     <td>{{item.date_created}}</td>
                     <td>{{item.original_amount}}</td>
                     <td><a href="{% url 'update-item' item.pk %}"><small>Update</small></a></td>
+                    <td><a href="{% url 'delete-item' item.pk %}"><small>Delete</small></a></td>
                 </tr>
                 {% endfor %}
             </tbody>

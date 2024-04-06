@@ -18,8 +18,7 @@ class AddItem_form(forms.ModelForm):
 class UpdateItem_form(forms.ModelForm):
     class Meta:
         model = Item
-        fields =['item_name']
-
+        fields =['item_name', 'item_amount']
 
 #Item Issue
 class ItemIssue_form(forms.ModelForm):
