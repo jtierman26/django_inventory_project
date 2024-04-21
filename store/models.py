@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 class Item(models.Model):
     item_name = models.CharField(max_length=100)
     item_amount = models.PositiveBigIntegerField()
-    creator = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    creator = models.ForeignKey(User, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
     original_amount = models.PositiveBigIntegerField(null=True, blank=True)
 
@@ -34,9 +34,9 @@ class ItemIssue(models.Model):
         ('Arts n Crafts','Arts n Crafts')
     )
 
-    item = models.ForeignKey(Item, on_delete=models.DO_NOTHING)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
     amount = models.PositiveBigIntegerField()
-    issued_by = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    issued_by = models.ForeignKey(User, on_delete=models.CASCADE)
     #can i make it so the form has a drop down to choose from users
     issued_to = models.CharField(max_length=100)
     department = models.CharField(max_length=100, choices= department_choices)
@@ -64,7 +64,7 @@ class ItemReturned(models.Model):
 # Restock Item Class 
     
 class RestockItem(models.Model):
-    item = models.ForeignKey(Item, on_delete = models.CASCADE)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
     amount = models.PositiveIntegerField()
     timestamp = models.DateField(auto_now_add=True)
     original_value = models.PositiveBigIntegerField(null=True, blank=True)

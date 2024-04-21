@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'store',
     'users',
     'widget_tweaks',
+    'chartjs',
 ]
 
 MIDDLEWARE = [

@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .form import AddItem_form, UpdateItem_form, ItemIssue_form, ItemReturned_form, RestockItem_form
 from .models import Item, ItemIssue, ItemReturned, RestockItem
+import json
 
 
 #dashboard graph (doesnt work)
@@ -63,17 +64,17 @@ def add_item(request):
 def update_item(request, pk):
     item = Item.objects.get(pk=pk)
     if request.method == 'POST':
-        form = UpdateItem_form(request.POST, instance=pk)
+        form = UpdateItem_form(request.POST, instance=item)
         if form.is_valid():
             form.save()
             messages.info(request, 'Item has succesfully been updated!')
             return redirect('all-items')
         else:
             messages.warning(request, 'Uh Oh... Something went wrong')
-            return redirect('all-items')
+            return redirect('dashboard')
     else:
         form = UpdateItem_form(instance=item)
-        context = {'form':form, 'item':item}
+        context = {'form':form}
         return render(request, 'store/update_item.html', context)
     
 
@@ -86,13 +87,14 @@ def all_Items(request):
 
 #delete the Item
 def delete_item(request, pk):
-    item = Item.objects.get(Item, pk=pk)
+    item = Item.objects.get(pk=pk)
     if request.method == 'POST':
         item.delete()
         messages.info(request, 'Item has been successfully deleted')
-        return redirect(request, 'store/all_items.html')
-    context = {'items':item}
-    return render(request, 'store/delete_item.html', context)
+        return redirect('all-items')
+    else:
+        context = {'item':item}
+        return render(request, 'store/delete_item.html', context)
 
 
 #item issue
@@ -192,4 +194,3 @@ def restock_history(request):
     items = RestockItem.objects.all()
     context = {'items':items}
     return render(request, 'store/restock_history.html', context)
-
